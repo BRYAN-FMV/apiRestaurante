@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import DBConfig from './config/dbConfig.js';
 import productosRoutes from './routes/productos.js';
+import ventaDetRoutes from './routes/ventaDet.js';
 
 // Configuración de variables de entorno
 dotenv.config();
@@ -31,13 +32,15 @@ app.get('/', (req, res) => {
         message: 'API Restaurante funcionando correctamente',
         version: '1.0.0',
         endpoints: {
-            productos: '/api/productos'
+            productos: '/api/productos',
+            ventaDetalle: '/api/venta-detalle'
         }
     });
 });
 
 // Rutas de la API
 app.use('/api/productos', productosRoutes);
+app.use('/api/venta-detalle', ventaDetRoutes);
 
 // Middleware para manejar rutas no encontradas
 app.use((req, res) => {
