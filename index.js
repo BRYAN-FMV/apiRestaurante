@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import DBConfig from './config/dbConfig.js';
 import productosRoutes from './routes/productos.js';
 import ventaDetRoutes from './routes/ventaDet.js';
+import ventaEncRoutes from './routes/ventaEnc.js';
+import compraRoutes from './routes/compra.js';
 
 // Configuración de variables de entorno
 dotenv.config();
@@ -41,6 +43,8 @@ app.get('/', (req, res) => {
 // Rutas de la API
 app.use('/api/productos', productosRoutes);
 app.use('/api/venta-detalle', ventaDetRoutes);
+app.use('/api/venta-encabezado', ventaEncRoutes);
+app.use('/api/compras', compraRoutes);
 
 // Middleware para manejar rutas no encontradas
 app.use((req, res) => {
