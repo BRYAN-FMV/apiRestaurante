@@ -1,4 +1,4 @@
-import ventaEnc from "../schemas/ventaEnc";
+import ventaEnc from "../schemas/ventaEnc.js";
 
 class VentaEncModel {
     async create(data) {

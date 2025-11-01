@@ -1,4 +1,4 @@
-import compraSchemas from "../schemas/compraSchemas.js";
+import compraSchemas from "../schemas/compra.js";
 
 class CompraModel {
   constructor() {
