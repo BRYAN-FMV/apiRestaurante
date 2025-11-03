@@ -4,22 +4,26 @@ const ventaDetSchema = new mongoose.Schema({
     ventaEncId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "VentaEnc",
-        required: true
+        required: [true, 'El ID de venta encabezado es requerido']
     },
     productoId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Producto",
-        required: true
+        required: [true, 'El ID del producto es requerido']
     },
     cantidad: {
         type: Number,
-        required: true
+        required: [true, 'La cantidad es requerida'],
+        min: [1, 'La cantidad debe ser mayor a 0']
     },
     precio: {
         type: Number,
-        required: true
+        required: [true, 'El precio es requerido'],
+        min: [0, 'El precio no puede ser negativo']
     }
+}, {
+    timestamps: true // Agrega createdAt y updatedAt automáticamente
 });
 
-const VentaDetModel = mongoose.model("VentaDet", ventaDetSchema);
-export default VentaDetModel;
+const VentaDet = mongoose.model("VentaDet", ventaDetSchema);
+export default VentaDet;

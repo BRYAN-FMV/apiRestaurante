@@ -5,11 +5,38 @@ class VentaDetController {
     // Crear un nuevo detalle de venta
     async createVentaDet(req, res) {
         try {
+            // Validar que los campos requeridos estén presentes
+            const { ventaEncId, productoId, cantidad, precio } = req.body;
+            
+            if (!ventaEncId || !productoId || !cantidad || !precio) {
+                return res.status(400).json({ 
+                    error: "Faltan campos requeridos",
+                    required: ["ventaEncId", "productoId", "cantidad", "precio"]
+                });
+            }
+
             const nuevaVentaDet = await ventaDet.create(req.body);
             res.status(201).json(nuevaVentaDet);
         } catch (error) {
             console.error("Error al crear ventaDet:", error);
-            res.status(500).json({ error: "Error al crear la ventaDet" });
+            
+            // Manejo específico de errores de validación
+            if (error.name === 'ValidationError') {
+                return res.status(400).json({ 
+                    error: "Error de validación",
+                    details: Object.values(error.errors).map(err => err.message)
+                });
+            }
+            
+            // Error de referencia (ID no válido)
+            if (error.name === 'CastError') {
+                return res.status(400).json({ 
+                    error: "ID no válido",
+                    details: "Uno de los IDs proporcionados no tiene el formato correcto"
+                });
+            }
+            
+            res.status(500).json({ error: "Error interno del servidor" });
         }
     }
 

@@ -20,4 +20,14 @@ const ventaEncSchema = new mongoose.Schema({
     }
 });
 
+// Middleware de respaldo para eliminación en cascada
+// (La eliminación principal se hace en el modelo)
+ventaEncSchema.pre('deleteOne', { document: true, query: false }, async function() {
+    try {
+        console.log(`🔄 Middleware de respaldo ejecutándose para ventaEnc ${this._id}`);
+    } catch (error) {
+        console.error('❌ Error en middleware de respaldo:', error);
+    }
+});
+
 export default mongoose.model("VentaEnc", ventaEncSchema);

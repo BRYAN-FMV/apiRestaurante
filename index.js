@@ -35,7 +35,9 @@ app.get('/', (req, res) => {
         version: '1.0.0',
         endpoints: {
             productos: '/api/productos',
-            ventaDetalle: '/api/venta-detalle'
+            ventaDetalle: '/api/venta-detalle',
+            ventaEncabezado: '/api/venta-encabezado',
+            compras: '/api/compras'
         }
     });
 });
