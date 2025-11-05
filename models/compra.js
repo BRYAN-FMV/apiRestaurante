@@ -27,5 +27,5 @@ class CompraModel {
   }
 }
 
-export default CompraModel;
+export default new CompraModel();
 
